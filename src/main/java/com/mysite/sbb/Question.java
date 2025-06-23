@@ -1,5 +1,6 @@
 package com.mysite.sbb;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -29,10 +30,10 @@ public class Question {
 	private String content;
 
 	// createDate → Table 매핑 시 create_date 변경됨
-	private String createDate;
+	private LocalDateTime createDate;
 
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	// mappedBy → 참조 엔티티의 속성명
-	// CascadeType.REMOVE → 게시글 삭제하면 하위 답변들도 함께 삭제하기 위해서 속성
-	private List<Answer> answerList;
+	// CascadeType.REMOVE → 게시글 삭제하면 하위 답변들도 함께 삭제
+	private List<Answer> answerList; // 해당 질문에 달린 답변 목록 저장
 }

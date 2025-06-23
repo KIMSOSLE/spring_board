@@ -1,5 +1,7 @@
 package com.mysite.sbb;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +24,7 @@ public class Answer {
 	@Column(columnDefinition = "TEXT") // 칼럼 글자수 제한 삭제
 	private String content;
 
-	private String createDate;
+	private LocalDateTime createDate;
 
 	@ManyToOne // N:1, 답변(자식)이 many, 질문(부모)이 one
 	private Question question;
