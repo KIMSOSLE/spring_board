@@ -20,10 +20,12 @@ public class QuestionService {
 	}
 
 	public Question getQuestion(Integer id) {
+
+		// Optional → 값이 있을 수도 있고 없을 수도 있는 컨테이너 객체
 		Optional<Question> question = this.questionRepository.findById(id);
 		if (question.isPresent()) { // 값이 존재하는지 확인
-			return question.get();
-		} else { // Exception 처리
+			return question.get(); // 값이 존재하면 get()으로 값 꺼냄
+		} else { // 존재하지 않다면 예외 발생
 			throw new DataNotFoundException("question not found");
 		}
 	}

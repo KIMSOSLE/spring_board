@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 
+// @RequestMapping → 프리픽스(prefix 접두사) 지정
 @RequestMapping("/question")
 @RequiredArgsConstructor // final 또는 @NonNull이 붙은 필드에 의존성 주입(DI)을 위한 생성자 자동 생성
 @Controller
@@ -19,7 +20,7 @@ public class QuestionController {
 	private final QuestionService questionService;
 
 	// 질문목록
-	@GetMapping("/question/list")
+	@GetMapping("/list")
 	// @ResponseBody 제거 → 뷰 이름을 반환하여 템플릿 렌더링을 하기 위해
 	public String list(Model model) {
 		// model → 컨트롤러에서 뷰(Thymeleaf 등)로 데이터를 전달하기 위한 인터페이스
@@ -32,7 +33,8 @@ public class QuestionController {
 	}
 
 	// 상세조회
-	@GetMapping(value = "/question/detail/{id}")
+	// @PathVariable("id") Integer id
+	@GetMapping(value = "/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
 		// @PathVariable → 경로 변수를 표시하기 위해 메서드에 매개변수에 사용
 		Question question = this.questionService.getQuestion(id);
