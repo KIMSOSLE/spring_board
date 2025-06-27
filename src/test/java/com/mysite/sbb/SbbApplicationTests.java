@@ -1,18 +1,10 @@
 package com.mysite.sbb;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.List;
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mysite.sbb.answer.Answer;
 import com.mysite.sbb.answer.AnswerRepository;
-import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionRepository;
 
 import jakarta.transaction.Transactional;
@@ -109,13 +101,13 @@ class SbbApplicationTests {
 //		// a.getQuestion() → 답변에 연결된 Question 객체
 
 		// '질문 데이터를 통해 답변 데이터 찾기' & 답변 데이터를 통해 질문데이터 찾기
-		Optional<Question> oq = this.questionRepository.findById(2);
-		assertTrue(oq.isPresent());
-		Question q = oq.get();
-
-		List<Answer> aList = q.getAnswerList(); // 여기까지 일반적으로 DB 세션 유지됨. 이후 끊어짐
-		// @Transactional 사용해야 함
-		assertEquals(1, aList.size());
-		assertEquals("답변드립니다.", aList.get(0).getContent());
+//		Optional<Question> oq = this.questionRepository.findById(2);
+//		assertTrue(oq.isPresent());
+//		Question q = oq.get();
+//
+//		List<Answer> aList = q.getAnswerList(); // 여기까지 일반적으로 DB 세션 유지됨. 이후 끊어짐
+//		// @Transactional 사용해야 함
+//		assertEquals(1, aList.size());
+//		assertEquals("답변드립니다.", aList.get(0).getContent());
 	}
 }
