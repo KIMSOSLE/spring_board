@@ -21,7 +21,7 @@ public class AnswerController {
 	private final QuestionService questionService;
 	private final AnswerService answerService;
 
-	@PostMapping("/create/{id}")
+	@PostMapping("/create/{id}") // value 생략 가능
 	public String createAnswer(Model model, @PathVariable("id") Integer id,
 			@RequestParam(value = "content") String content) {
 		// @RequestParam(value = "content") String content
