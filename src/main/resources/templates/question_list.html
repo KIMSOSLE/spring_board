@@ -18,13 +18,13 @@
 				<tr th:each="question, loop : ${questionList}">
 					<!-- 번호는 loop.count를 사용하여 표시, 자바객체의 id가 아닌 단순 번호 -->
 					<td th:text="${loop.count}"></td>
-					<td><a th:href="@{|/question/detail/${question.id}|}"
-						th:text="${question.subject}"></a></td>
+					<td><a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a></td>
 					<!-- 타임리프 #temporals.format(날짜 객체, 날짜 포맷) -->
 					<td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
 				</tr>
 			</tbody>
 		</table>
+			<a th:href="@{/question/create}" class="btn btn-primary">질문등록</a>
 	</div>
 </body>
 </html>
