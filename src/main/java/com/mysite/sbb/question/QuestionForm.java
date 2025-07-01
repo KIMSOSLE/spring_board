@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class QuestionForm {
 
+	// @NotEmpty → 빈 값 검사
+	// @Size → 글자수 검사
 	@NotEmpty(message = "제목을 입력해주세요.")
 	@Size(max = 200)
 	private String subject;

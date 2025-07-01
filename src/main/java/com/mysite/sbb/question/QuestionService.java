@@ -36,6 +36,6 @@ public class QuestionService {
 		question.setSubject(subject);
 		question.setContent(content);
 		question.setCreateDate(LocalDateTime.now());
-		this.questionRepository.save(question);
+		this.questionRepository.save(question); // question 객체 저장
 	}
 }
