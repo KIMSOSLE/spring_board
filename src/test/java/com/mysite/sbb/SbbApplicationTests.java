@@ -6,8 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.mysite.sbb.answer.AnswerRepository;
 import com.mysite.sbb.question.QuestionRepository;
-
-import jakarta.transaction.Transactional;
+import com.mysite.sbb.question.QuestionService;
 
 @SpringBootTest
 class SbbApplicationTests {
@@ -19,8 +18,11 @@ class SbbApplicationTests {
 	@Autowired
 	private AnswerRepository answerReposiotry;
 
+	@Autowired
+	private QuestionService questionService;
+
+//	@Transactional // 모든 DB 작업이 성공해야 커밋되고, 하나라도 실패하면 모두 실패
 	// testJpa()에 대하여 DB 세션 유지시킴
-	@Transactional // 모든 DB 작업이 성공해야 커밋되고, 하나라도 실패하면 모두 실패
 	@Test
 	void testJpa() {
 
@@ -109,5 +111,12 @@ class SbbApplicationTests {
 //		// @Transactional 사용해야 함
 //		assertEquals(1, aList.size());
 //		assertEquals("답변드립니다.", aList.get(0).getContent());
+
+		// 테스트 데이터 300개 생성
+		for (int i = 1; i <= 300; i++) {
+			String subject = String.format("데스트 데이터 입니다:[%03d]", i);
+			String content = "내용無";
+			this.questionService.create(subject, content);
+		}
 	}
 }
