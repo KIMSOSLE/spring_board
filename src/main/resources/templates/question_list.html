@@ -15,15 +15,21 @@
 					<th>Date</th>
 				</tr>
 			</thead>
+
 			<tbody>
 				<tr th:each="question, loop : ${paging}">
-					<!-- 번호는 loop.count를 사용하여 표시, 자바객체의 id가 아닌 단순 번호 -->
-					<td th:text="${loop.count}"></td>
+					<!-- 게시글 번호 공식 적용 -->
+					<td th:text="${paging.totalElements - (paging.number * paging.size) - loop.index}">
+					</td>
 					<td><a th:href="@{|/question/detail/${question.id}|}"
-						th:text="${question.subject}"></a></td>
+						th:text="${question.subject}"></a>
+						<!-- 답변 개수 표시 -->
+						<span class="text-danger small ms-2"
+						th:if="${#lists.size(question.answerList) > 0}"
+						th:text="${#lists.size(question.answerList)}"> </span>
+					</td>
 					<!-- 타임리프 #temporals.format(날짜 객체, 날짜 포맷) -->
-					<td
-						th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+					<td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
 				</tr>
 			</tbody>
 		</table>
