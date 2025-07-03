@@ -24,6 +24,7 @@ public class UserController {
 
 	@PostMapping("/signup")
 	public String signup(@Valid UserForm userForm, BindingResult bindingResult) {
+
 		if (bindingResult.hasErrors()) {
 			return "signup_form";
 		}
@@ -33,7 +34,6 @@ public class UserController {
 			return "signup_form";
 		}
 
-//		userService.create(userForm.getUsername(), userForm.getEmail(), userForm.getPassword1());
 		try {
 			userService.create(userForm.getUsername(), userForm.getEmail(), userForm.getPassword1());
 		} catch (DataIntegrityViolationException e) {
@@ -47,5 +47,10 @@ public class UserController {
 		}
 
 		return "redirect:/";
+	}
+
+	@GetMapping("/login")
+	public String login() {
+		return "login_form";
 	}
 }
