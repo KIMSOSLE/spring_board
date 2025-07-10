@@ -45,8 +45,10 @@ public class AnswerController {
 		}
 
 		// 답변 등록될 때 siteUser 객체를 통해 author_id 저장
-		this.answerService.create(question, answerForm.getContent(), siteUser);
-		return String.format("redirect:/question/detail/%s", id);
+//		this.answerService.create(question, answerForm.getContent(), siteUser);
+//		return String.format("redirect:/question/detail/%s", id);
+		Answer answer = this.answerService.create(question, answerForm.getContent(), siteUser);
+		return String.format("redirect:/question/detail/%s#answer_%s", answer.getQuestion().getId(), answer.getId());
 	}
 
 	// 답변수정
@@ -74,7 +76,8 @@ public class AnswerController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
 		}
 		this.answerService.modify(answer, answerForm.getContent());
-		return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+//		return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+		return String.format("redirect:/question/detail/%s#answer_%s", answer.getQuestion().getId(), answer.getId());
 	}
 
 	// 답변삭제
@@ -87,5 +90,15 @@ public class AnswerController {
 		}
 		this.answerService.delete(answer);
 		return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+	}
+
+	// 답변추천
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/vote/{id}")
+	public String answerVote(Principal principal, @PathVariable("id") Integer id) {
+		Answer answer = this.answerService.getAnswer(id);
+		SiteUser siteUser = this.userService.getUser(principal.getName());
+		this.answerService.vote(answer, siteUser);
+		return String.format("redirect:/question/detail/%s#answer_%s", answer.getQuestion().getId(), answer.getId());
 	}
 }
